@@ -1,12 +1,23 @@
 import './App.css'; 
-import HookListProduct from './HookListProduct';
+
 import { ListProduct } from './ListProduct';
+import NavBar from './NavBar';
+import {BrowserRouter as Router,Routes, Route } from 'react-router-dom';
+import HookListProduct from './HookListProduct';
+import Home from './Home';
 
 
 function App() {
   return (
-    <ListProduct></ListProduct>
-        // < HookListProduct/>    
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path='/' exact  element={<Home/>} />
+        <Route path='/Product' element={<ListProduct/>} />
+        <Route path='/hook' element={<HookListProduct/>} />
+      </Routes>
+    </Router> 
+   
   );
 }
 

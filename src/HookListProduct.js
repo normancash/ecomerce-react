@@ -3,11 +3,13 @@ import ProductServices from './service/ProductServices';
 import {DataTable} from 'primereact/datatable';
 import { Column } from "primereact/column";
 import {Panel} from "primereact/panel";
+import { Toolbar } from 'primereact/toolbar';
+import {Button} from 'primereact/button';
 
 
 
 
-export default function HookListProduct(){
+export default  function HookListProduct(){
 
     let emptyProduct = {
         id: null,
@@ -25,12 +27,28 @@ export default function HookListProduct(){
 
     useEffect(()=>{
         productServices.getAll().then((data)=>(setProducts(data)));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]); 
+
+    const findByCategory =()=> {
+        let id = 2;
+        productServices.getByCategory(id).then((data)=>(setProducts(data)));
+    }
+
+    const leftContents = (
+        <React.Fragment>
+            <Button label="Zapato" className="mr-2" onClick={findByCategory()} />                       
+        </React.Fragment>            
+    );
 
 
     return(
+
+       
+
         <div style={{width:'80%', margin: '0 auto', marginTop: '20px'}}>  
-             <Panel header="Products">                
+             <Panel header="Products">  
+                <Toolbar left={leftContents}/>             
                 <DataTable value={products} 
                     dataKey="id" 
                     selection={selectedProduct}
@@ -45,5 +63,7 @@ export default function HookListProduct(){
                 </Panel>
         </div>
     );
+
+   
 }
 

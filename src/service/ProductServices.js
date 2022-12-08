@@ -15,6 +15,10 @@ class ProductServices {
     delete(id) {
         return axios.delete(URL + "/delete/"+id).then(res => res.data);
     }
+
+    getByCategory(idCategory) {
+        return axios.get(URL + "/listProduct/"+idCategory).then(res => res.data);
+    }
 }
 
 export default ProductServices
